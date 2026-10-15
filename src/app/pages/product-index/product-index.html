@@ -30,6 +30,7 @@
       <h3>{{ p.name | uppercase }}</h3>
       <p>{{ p.price | money : '$' }}</p>
       <img [src]="p.imageUrl" [alt]="'Image de ' + p.name" height="150">
+      <button (click)="removeProduct(p.id)">❌</button>
     </div>
 
   } @empty {
@@ -38,3 +39,9 @@
 
   }
 </div>
+
+@if(selectedProduct()){
+  <app-confirm [productName]="selectedProduct()!.name" (confirm)="handleConfirm($event)">
+    <h3>Suppression d'un produit</h3>
+  </app-confirm>
+}

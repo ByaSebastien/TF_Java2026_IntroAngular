@@ -1,0 +1,7 @@
+<h2>Chrono</h2>
+<p>{{ seconds() | chrono }}</p>
+<div class="buttons">
+  <button (click)="start()" [disabled]="timer">Start</button>
+  <button (click)="stop()" [disabled]="!timer">Stop</button>
+  <button (click)="reset()" [disabled]="seconds() <= 0 || timer">Reset</button>
+</div>

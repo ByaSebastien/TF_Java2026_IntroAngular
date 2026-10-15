@@ -1,0 +1,6 @@
+<ng-content></ng-content>
+<p>Êtes vous sûr de vouloir supprimer {{ productName() }} ?</p>
+<div class="buttons">
+  <button (click)="confirm.emit(true)">Oui</button>
+  <button (click)="confirm.emit(false)">Non</button>
+</div>

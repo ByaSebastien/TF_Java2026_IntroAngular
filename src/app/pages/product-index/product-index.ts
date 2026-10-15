@@ -3,9 +3,10 @@ import { ProductDto } from '../../models/product-dto';
 import { FormsModule } from '@angular/forms';
 import { UpperCasePipe } from '@angular/common';
 import { MoneyPipe } from '../../pipes/money-pipe';
+import { Confirm } from '../../components/confirm/confirm';
 
 @Component({
-  imports: [FormsModule, UpperCasePipe, MoneyPipe],
+  imports: [FormsModule, UpperCasePipe, MoneyPipe, Confirm],
   selector: 'app-product-index',
   styleUrl: './product-index.scss',
   templateUrl: './product-index.html',
@@ -22,6 +23,8 @@ export class ProductIndex implements OnDestroy {
   number: WritableSignal<number> = signal(1);
 
   timer: number;
+
+  selectedProduct: WritableSignal<ProductDto | undefined> = signal(undefined) ;
 
   constructor() {
     this.timer = setInterval(() => {
@@ -86,7 +89,19 @@ export class ProductIndex implements OnDestroy {
   }
 
   removeProduct(id: number) {
-    console.log('Product removed successfully');
+
+    let p = this.products().find((p) => p.id === id);
+
+    this.selectedProduct.set(p);
+  }
+
+  handleConfirm(isConfirm: boolean) {
+    if(isConfirm) {
+      this.products.update((products) =>
+        products.filter(p => p.id !== this.selectedProduct()!.id!)
+      );
+    }
+    this.selectedProduct.set(undefined);
   }
 
   ngOnDestroy(): void {
