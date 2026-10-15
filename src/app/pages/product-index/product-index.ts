@@ -1,9 +1,11 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { ProductDto } from '../../models/product-dto';
 import { FormsModule } from '@angular/forms';
+import { UpperCasePipe } from '@angular/common';
+import { MoneyPipe } from '../../pipes/money-pipe';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, UpperCasePipe, MoneyPipe],
   selector: 'app-product-index',
   styleUrl: './product-index.scss',
   templateUrl: './product-index.html',
@@ -20,7 +22,6 @@ export class ProductIndex {
   number: WritableSignal<number> = signal(1);
 
   constructor() {
-
     setInterval(() => {
       console.log(this.number());
       this.number.set(this.number() + 1);

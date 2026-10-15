@@ -23,8 +23,8 @@
 
 @for (p of products(); track p.id;) {
 
-  <h3>{{ p.name }}</h3>
-  <p>{{ p.price }}</p>
+  <h3>{{ p.name | uppercase }}</h3>
+  <p>{{ p.price | money : '$' }}</p>
   <img [src]="p.imageUrl" [alt]="'Image de ' + p.name" height="150">
 
 } @empty {
