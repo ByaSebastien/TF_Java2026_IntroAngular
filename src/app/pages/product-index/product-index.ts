@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, OnDestroy, signal, WritableSignal } from '@angular/core';
 import { ProductDto } from '../../models/product-dto';
 import { FormsModule } from '@angular/forms';
 import { UpperCasePipe } from '@angular/common';
@@ -10,7 +10,7 @@ import { MoneyPipe } from '../../pipes/money-pipe';
   styleUrl: './product-index.scss',
   templateUrl: './product-index.html',
 })
-export class ProductIndex {
+export class ProductIndex implements OnDestroy {
   private nextId = 1;
   products: WritableSignal<ProductDto[]> = signal([]);
 
@@ -21,8 +21,10 @@ export class ProductIndex {
 
   number: WritableSignal<number> = signal(1);
 
+  timer: number;
+
   constructor() {
-    setInterval(() => {
+    this.timer = setInterval(() => {
       console.log(this.number());
       this.number.set(this.number() + 1);
     }, 1000);
@@ -85,5 +87,9 @@ export class ProductIndex {
 
   removeProduct(id: number) {
     console.log('Product removed successfully');
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.timer);
   }
 }

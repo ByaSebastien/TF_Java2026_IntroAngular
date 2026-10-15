@@ -1,34 +1,40 @@
 <h2>Product Index</h2>
 
 <h3>{{ number() }}</h3>
+<div class="form">
 
-<div>
-  <label for="name">Nom :</label>
-  <input type="text" id="name" [(ngModel)]="nameInput">
+  <div>
+    <label for="name">Nom :</label>
+    <input type="text" id="name" [(ngModel)]="nameInput">
+  </div>
+  <div>
+    <label for="desc">Description :</label>
+    <input type="text" id="desc" [(ngModel)]="descriptionInput">
+  </div>
+  <div>
+    <label for="price">Prix :</label>
+    <input type="number" id="price" [(ngModel)]="priceInput">
+  </div>
+  <div>
+    <label for="image">Image URL :</label>
+    <input type="text" id="image" [(ngModel)]="imageInput">
+  </div>
+  <button (click)="addProduct()">Ajouter</button>
 </div>
-<div>
-  <label for="desc">Description :</label>
-  <input type="text" id="desc" [(ngModel)]="descriptionInput">
+
+<div class="contents">
+
+  @for (p of products(); track p.id; ) {
+
+    <div class="product-card">
+      <h3>{{ p.name | uppercase }}</h3>
+      <p>{{ p.price | money : '$' }}</p>
+      <img [src]="p.imageUrl" [alt]="'Image de ' + p.name" height="150">
+    </div>
+
+  } @empty {
+
+    <p>Pas de produits</p>
+
+  }
 </div>
-<div>
-  <label for="price">Prix :</label>
-  <input type="number" id="price" [(ngModel)]="priceInput">
-</div>
-<div>
-  <label for="image">Image URL :</label>
-  <input type="text" id="image" [(ngModel)]="imageInput">
-</div>
-
-<button (click)="addProduct()">Ajouter</button>
-
-@for (p of products(); track p.id;) {
-
-  <h3>{{ p.name | uppercase }}</h3>
-  <p>{{ p.price | money : '$' }}</p>
-  <img [src]="p.imageUrl" [alt]="'Image de ' + p.name" height="150">
-
-} @empty {
-
-  <p>Pas de produits</p>
-
-}

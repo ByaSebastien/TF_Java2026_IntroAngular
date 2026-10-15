@@ -1,0 +1,61 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  h2 {
+    text-align: center;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  .form {
+    border: solid 1px #ccc;
+    width: 50%;
+    margin: auto;
+    padding: 1.5rem;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+
+    button {
+      margin-left: auto;
+      display: block;
+      padding: 0.5rem;
+      background-color: darkcyan;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s transform ease-in-out;
+    }
+
+    button:hover {
+      transform: scale(1.15);
+    }
+  }
+
+  .contents {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2rem;
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: fit-content;
+      border: 1px solid #ccc;
+      padding: 1.5rem;
+
+      p {
+        text-align: center;
+      }
+    }
+  }
+}
