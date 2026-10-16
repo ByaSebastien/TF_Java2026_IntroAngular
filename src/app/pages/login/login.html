@@ -1,0 +1,21 @@
+<h2>Login form</h2>
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <div>
+    <label for="login">Identifiant</label>
+    <input type="text" id="login" formControlName="login">
+    @if(loginForm.controls.login.touched && loginForm.controls.login.hasError('required')){
+      <span style="color: red">Champs requis</span>
+    }
+    @if(loginForm.controls.login.touched && loginForm.controls.login.hasError('maxlength')){
+      <span style="color: red">Max 50 caractère</span>
+    }
+  </div>
+  <div>
+    <label for="password">Mot de passe</label>
+    <input type="password" id="password" formControlName="password">
+    @if(loginForm.controls.password.touched && loginForm.controls.password.hasError('required')){
+      <span style="color: red">Champs requis</span>
+    }
+  </div>
+  <button type="submit">Se connecter</button>
+</form>

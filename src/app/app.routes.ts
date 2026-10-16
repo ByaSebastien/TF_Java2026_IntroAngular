@@ -8,27 +8,29 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadComponent: () =>
-      import('./pages/home/home').then(m => m.Home),
+    loadComponent: () => import('./pages/home/home').then((m) => m.Home),
   },
   {
     path: 'about',
-    loadComponent: () =>
-      import('./pages/about/about').then(m => m.About),
+    loadComponent: () => import('./pages/about/about').then((m) => m.About),
   },
   {
     path: 'product',
     loadComponent: () =>
-      import('./pages/product-index/product-index').then(m => m.ProductIndex),
+      import('./pages/product-index/product-index').then((m) => m.ProductIndex),
   },
   {
     path: 'chrono',
-    loadComponent: () =>
-      import('./pages/chrono/chrono').then(m => m.Chrono),
+    loadComponent: () => import('./pages/chrono/chrono').then((m) => m.Chrono),
   },
   {
     path: 'cart-exo',
     loadComponent: () =>
-      import('./pages/cart-exo/cart-exo').then(m => m.CartExo),
+      import('./pages/cart-exo/cart-exo').then((m) => m.CartExo),
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login').then((m) => m.Login),
   },
 ];
