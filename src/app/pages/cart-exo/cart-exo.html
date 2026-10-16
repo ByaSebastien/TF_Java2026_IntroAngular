@@ -1,0 +1,17 @@
+<h2>Cart Exo</h2>
+
+@for (p of products(); track p.id) {
+  <div class="product-item">
+    <img width="50" [src]="p.imageUrl" alt="image">
+    <p>{{ p.name }}</p>
+    <p>{{ p.price | money }}</p>
+    <button (click)="addToCart(p.id)">Ajouter au panier</button>
+  </div>
+}
+
+<app-cart
+  [cart]="cart()"
+  (minusEvent)="handleMinusEvent($event)"
+  (plusEvent)="handlePlusEvent($event)"
+  (removeEvent)="handleRemoveEvent($event)"
+/>

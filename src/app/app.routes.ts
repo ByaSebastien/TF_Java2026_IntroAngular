@@ -25,5 +25,10 @@ export const routes: Routes = [
     path: 'chrono',
     loadComponent: () =>
       import('./pages/chrono/chrono').then(m => m.Chrono),
-  }
+  },
+  {
+    path: 'cart-exo',
+    loadComponent: () =>
+      import('./pages/cart-exo/cart-exo').then(m => m.CartExo),
+  },
 ];

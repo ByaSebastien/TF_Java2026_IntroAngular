@@ -1,0 +1,20 @@
+<h2>Cart</h2>
+@for (cl of cart(); track cl.product.id) {
+  <div class="cart-line-item">
+    <p>{{ cl.product.name }}</p>
+    <p>{{ cl.quantity }}</p>
+    <div class="buttons">
+      <button (click)="triggerMinusEvent(cl.product.id)">➖</button>
+      <button (click)="triggerPlusEvent(cl.product.id)">➕</button>
+      <button (click)="triggerRemoveEvent(cl.product.id)">❌</button>
+    </div>
+  </div>
+} @empty {
+  <div class="cart-line-item">
+    <p>Panier vide</p>
+  </div>
+}
+
+@if (total()) {
+  <p class="montant">Montant total du panier : {{ total() | money }}</p>
+}
