@@ -4,3 +4,34 @@
   margin: 0;
   padding: 0;
 }
+
+/* Define keyframe animations */
+@keyframes rotate-out {
+  to {
+    transform: rotate(90deg);
+    background-color: chartreuse;
+  }
+}
+
+@keyframes rotate-in {
+  from {
+    transform: rotate(-90deg);
+    background-color: purple;
+  }
+}
+
+/* Nom de transition donné à la zone qui contient le router-outlet */
+main {
+  view-transition-name: page;
+}
+
+/* Target view transition pseudo-elements */
+::view-transition-old(page),
+::view-transition-new(page) {
+  animation-duration: 200ms;
+  animation-name: -ua-view-transition-fade-in;
+}
+
+::view-transition-old(page) {
+  animation-name: -ua-view-transition-fade-out;
+}

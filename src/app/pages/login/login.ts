@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [FormsModule, ReactiveFormsModule],
@@ -9,14 +11,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class Login {
   private readonly _fb: FormBuilder = inject(FormBuilder);
+  private readonly _authService: AuthService = inject(AuthService);
+  private readonly _router: Router = inject(Router)
 
   loginForm = this._fb.group({
-    login: [null, [Validators.required, Validators.maxLength(50)]],
+    username: [null, [Validators.required, Validators.maxLength(50)]],
     password: [null, [Validators.required]],
-  });
-
-  globalForm = this._fb.group({
-    login: this.loginForm
   });
 
   constructor() {}
@@ -29,8 +29,18 @@ export class Login {
       return;
     }
 
-    console.log('Valid');
-    console.log(this.loginForm.value);
-    // Todo Contacter servie d'auth qui lui contactera notre back end
+    this._authService.login(this.loginForm.value as any).subscribe({
+      next: (result) => {
+        console.log("Ok");
+        console.log(result);
+        this._router.navigate(['game'])
+      },
+      error: (err) => {
+        console.error(err);
+      },
+      complete: () => {
+        console.log("Complete");
+      }
+    });
   }
 }

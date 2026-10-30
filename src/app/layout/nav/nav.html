@@ -3,4 +3,10 @@
 <a routerLink="/product">Product</a>
 <a routerLink="/chrono">Chrono</a>
 <a routerLink="/cart-exo">Cart</a>
-<a routerLink="/login">Login</a>
+@if (!connectedUser()) {
+  <a routerLink="/login">Login</a>
+} @else {
+  <button (click)="logout()">Logout</button>
+}
+<a routerLink="/contact">Contact</a>
+<a routerLink="/game">Game</a>

@@ -1,0 +1,66 @@
+<h2>Contact Form</h2>
+<section>
+  <form [formGroup]="globalForm" (ngSubmit)="submit()">
+    <fieldset [formGroup]="contactForm">
+      <div>
+        <input type="text" formControlName="firstname" placeholder="Fisrtname">
+        <app-form-error [control]="contactForm.controls.firstname"></app-form-error>
+      </div>
+      <div>
+        <input type="text" formControlName="lastname" placeholder="Lastname">
+        <app-form-error [control]="contactForm.controls.lastname"></app-form-error>
+      </div>
+      <div>
+        <input type="email" formControlName="email" placeholder="Email">
+        <app-form-error [control]="contactForm.controls.email"></app-form-error>
+      </div>
+      <div>
+        <label for="meetingType">Meeting type : </label>
+        <select id="meetingType" formControlName="meetingType">
+          @for (p of MeetingType | keyvalue; track p.key) {
+            <option [value]="p.key">{{ p.value }}</option>
+          }
+        </select>
+        <app-form-error [control]="contactForm.controls.meetingType"></app-form-error>
+      </div>
+      <div>
+        <textarea formControlName="description" cols="50" rows="10" placeholder="Description"></textarea>
+        <app-form-error [control]="contactForm.controls.description"></app-form-error>
+      </div>
+      <label>Availabilities : </label>
+      <button (click)="addAvailability()" type="button">➕</button>
+      <div class="availabilities" [formArray]="availabilities">
+        @for (availibility of availabilities.controls; track availibility) {
+          <div>
+            <input type="date" [formControlName]="$index">
+            @if (availabilities.length > 1) {
+              <button (click)="removeAvailability($index)" type="button">➖</button>
+            }
+            <app-form-error [control]="availabilities.controls[$index]"></app-form-error>
+          </div>
+        }
+      </div>
+      <div>
+        <label for="atHome">At home ?</label>
+        <input id="atHome" type="checkbox" formControlName="atHome">
+      </div>
+    </fieldset>
+    @if (addressForm.enabled){
+      <fieldset [formGroup]="addressForm">
+        <div>
+          <input type="text" formControlName="street" placeholder="Street">
+          <app-form-error [control]="addressForm.controls.street"></app-form-error>
+        </div>
+        <div>
+          <input type="text" formControlName="city" placeholder="City">
+          <app-form-error [control]="addressForm.controls.city"></app-form-error>
+        </div>
+        <div>
+          <input type="text" formControlName="zipCode" placeholder="Zip code">
+          <app-form-error [control]="addressForm.controls.zipCode"></app-form-error>
+        </div>
+      </fieldset>
+    }
+    <button type="submit">Submit</button>
+  </form>
+</section>

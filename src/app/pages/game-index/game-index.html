@@ -1,0 +1,14 @@
+<a routerLink="/game-create">Create new</a>
+
+@if (result.isLoading()) {
+
+  <p>Loading ...</p>
+
+} @else {
+
+  @for (g of page()!.content; track g.id) {
+    <p>{{ g.name }}</p>
+  }
+  <button [disabled]="page()!.first" (click)="prev()">⬅️</button>
+  <button [disabled]="page()!.last" (click)="next()">➡️</button>
+}
